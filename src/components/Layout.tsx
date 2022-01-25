@@ -13,7 +13,7 @@ const Layout: React.FC<TitleProps> = ({ children, title = "Nextjs" }) => {
         <title>{title}</title>
       </Head>
       <header>
-        <nav className="bg-gray-800 w-screen">
+        <nav className="bg-gray-800 w-screen text-white">
           <div className="flex items-center pl-8 h-14">
             <div className="flex space-x-4">
               <Link href="/">
