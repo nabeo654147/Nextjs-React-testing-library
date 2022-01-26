@@ -15,10 +15,6 @@ const handlers = [
   rest.get("https://jsonplaceholder.typicode.com/posts/", (req, res, ctx) => {
     const query = req.url.searchParams;
     const _limit = query.get("_limit=10");
-    // })
-    // rest.get(
-    //   "https://jsonplaceholder.typicode.com/posts/?_limit=10",
-    //   (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json([
