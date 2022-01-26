@@ -11,24 +11,26 @@ import CommentPage from "../src/pages/comment-page";
 const server = setupServer(
   rest.get("https://jsonplaceholder.typicode.com/comments", (req, res, ctx) => {
     const query = req.url.searchParams;
-    const _limit = query.get("_limit=10");
-    return res(
-      ctx.status(200),
-      ctx.json([
-        {
-          postId: 1,
-          id: 1,
-          email: "dummya@gmail.com",
-          body: "test body a",
-        },
-        {
-          postId: 2,
-          id: 2,
-          email: "dummyb@gmail.com",
-          body: "test body b",
-        },
-      ])
-    );
+    const _limit = query.get("_limit");
+    if (_limit === "10") {
+      return res(
+        ctx.status(200),
+        ctx.json([
+          {
+            postId: 1,
+            id: 1,
+            email: "dummya@gmail.com",
+            body: "test body a",
+          },
+          {
+            postId: 2,
+            id: 2,
+            email: "dummyb@gmail.com",
+            body: "test body b",
+          },
+        ])
+      );
+    }
   })
 );
 
@@ -55,8 +57,10 @@ describe("Comment page with useSWR / Succes+Error", () => {
         "https://jsonplaceholder.typicode.com/comments",
         (req, res, ctx) => {
           const query = req.url.searchParams;
-          const _limit = query.get("_limit=10");
-          return res(ctx.status(400));
+          const _limit = query.get("_limit");
+          if (_limit === "10") {
+            return res(ctx.status(400));
+          }
         }
       )
     );
